@@ -1,18 +1,21 @@
-# enviroment variable
-: 'ZPLUG' && {
+: 'env vars for global' && {
+  export DOTZSH_HOME=${HOME}/zsh
+}
+
+: 'env vars for zplug' && {
   export ZPLUG_HOME=/usr/local/opt/zplug
   if [ ! -e ${ZPLUG_HOME} ]; then
     curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
   fi
 }
 
-: 'HISTORY' && {
+: 'env vars for history' && {
   export HISTFILE=${HOME}/.zsh_history
   export HISTSIZE=1000
   export SAVEHIST=100000
 }
 
-: 'LOCALE & TIMEZONE' && {
+: 'env vars for locale & timezone' && {
   export TZ='Asia/Tokyo'
   export LANGUAGE='ja_JP.UTF-8'
   export LANG='${LANGUAGE}'
@@ -20,15 +23,15 @@
   export LC_TYPE='${LANGUAGE}'
 }
 
-: 'LOAD PATH' && {
+: 'env vars for path' && {
   export PATH=/usr/local/opt/inetutils/libexec/gnubin:${PATH}
   export PATH=$(go env GOPATH)/bin:${PATH}
 }
 
-: 'EDITOR' && {
+: 'env vars for editor' && {
   export EDITOR=vim
 }
 
-: 'MANPATH' && {
+: 'env vars for man' && {
   export MANPATH=/usr/local/opt/inetutils/libexec/gnuman:${MANPATH}
 }
