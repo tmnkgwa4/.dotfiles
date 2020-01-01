@@ -8,14 +8,19 @@
   alias fgrep='fgrep --color=auto'
   alias egrep='egrep --color=auto'
 
+  # common aliases
   alias rm='rm -i'
   alias cp='cp -i'
   alias mv='mv -i'
   alias mkdir='mkdir -p'
   alias tf='terraform'
+  alias ..="cd .."
+  alias ...="cd ../.."
+  alias ....="cd ../../.."
+  alias .....="cd ../../../.."
 }
 
-: 'alias for ls or exa' && {
+: 'Alias for ls or exa' && {
   if (($+commands[exa])); then
     alias ls="exa -F"
     alias ll="exa -hlBFS"
@@ -29,14 +34,14 @@
   fi
 }
 
-: 'alias for tmux' && {
+: 'Alias for tmux' && {
   if (($+commands[tmux])); then
     alias t='tmux new -s "$(date +%Y-%m-%d_%H-%M-%S)"'
     alias tl='tmux ls'
   fi
 }
 
-: 'alias for git' && {
+: 'Alias for git' && {
   if (($+commands[git])); then
     alias ga='git add'
     alias gc='git commit -m'
@@ -44,17 +49,16 @@
   fi
 }
 
-: 'alias for kubernetes config' && {
+: 'Alias for kubernetes config' && {
   if (($+commands[kubectl])); then
     alias k='kubectl'
     alias ka='kubectl apply'
     alias kd='kubectl delete'
     alias kcr='export KUBECONFIG="$HOME/.kube-raspi/config"'
-    alias kcg='export KUBECONFIG="$HOME/.kube-gke/config"'
   fi
 }
 
-: 'alias for vim' && {
+: 'Alias for vim' && {
   alias vi='vim'
   alias view='vim -R'
 }
