@@ -7,5 +7,5 @@
 }
 
 : 'Load environment files.' && {
-  source .env
+  source ./libs/env.zsh
 }
