@@ -18,9 +18,9 @@
 : 'env vars for locale & timezone' && {
   export TZ='Asia/Tokyo'
   export LANGUAGE='ja_JP.UTF-8'
-  export LANG='${LANGUAGE}'
-  export LC_ALL='${LANGUAGE}'
-  export LC_TYPE='${LANGUAGE}'
+  export LANG=${LANGUAGE}
+  export LC_ALL=${LANGUAGE}
+  export LC_TYPE=${LANGUAGE}
 }
 
 : 'env vars for path' && {

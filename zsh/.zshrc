@@ -1,11 +1,15 @@
-: 'Load libs files.' && {
-  source ./libs/utils.zsh
+: 'Load myfunction files.' && {
+  source ./.zsh.d/utils.zsh
+}
+
+: 'Load zplug files' && {
+  source ./.zsh.d/zplug.zsh
 }
 
 : 'Load alias files.' && {
-  source ./libs/alias.zsh
+  source ./.zsh.d/alias.zsh
 }
 
 : 'Load environment files.' && {
-  source ./libs/env.zsh
+  source ./.zsh.d/env.zsh
 }
