@@ -69,13 +69,18 @@ precmd() {
   zstyle ':vcs_info:git:*' check-for-changes true
   zstyle ':vcs_info:git:*' stagedstr "%F{yellow}!"
   zstyle ':vcs_info:git:*' unstagedstr "%F{magenta}+"
-  zstyle ':vcs_info:*' formats '%F{green}%c%u{%r}-[%b]%f'
-  zstyle ':vcs_info:*' actionformats '%F{red}%c%u{%r}-[%b|%a]%f'
+  if [ "$(uname)" = 'Darwin' ]; then
+    zstyle ':vcs_info:*' formats '%F{green}%c%u[✔ %b]%f'
+    zstyle ':vcs_info:*' actionformats '%F{red}%c%u[✑ %b|%a]%f'
+  else
+    zstyle ':vcs_info:*' formats '%F{green}%c%u{%r}-[%b]%f'
+    zstyle ':vcs_info:*' actionformats '%F{red}%c%u{%r}-[%b|%a]%f'
+  fi
 
   if is_osx; then
     local left=$'$(powerline-go --shell zsh $?)'
     local right=$'${vcs_info_msg_0_} '
-  else;
+  else
     local left=$'%{\e[38;5;083m%}%n%{\e[0m%} %{\e[$[32+$RANDOM % 5]m%}➜%{\e[0m%} %{\e[38;5;051m%}%d%{\e[0m%}'
     local right=$'${vcs_info_msg_0_} '
   fi
@@ -89,7 +94,7 @@ precmd() {
 
   if is_osx; then
     print -P $left
-  else;
+  else
     print -P $left${(r:$padwidth:: :)}$right
   fi
 }
