@@ -27,7 +27,7 @@
   # $EPOCHSECONDS, strftime等を利用可能に
   zmodload zsh/datetime
 
-  if [[ "$(uname)" = 'Darwin' ]] ; then
+  if is_osx ; then
     reset_tmout() {
       export TMOUT=$[1-EPOCHSECONDS%1]
     }
@@ -72,16 +72,24 @@ precmd() {
   zstyle ':vcs_info:*' formats '%F{green}%c%u{%r}-[%b]%f'
   zstyle ':vcs_info:*' actionformats '%F{red}%c%u{%r}-[%b|%a]%f'
 
-  local left=$'%{\e[38;5;083m%}%n%{\e[0m%} %{\e[$[32+$RANDOM % 5]m%}➜%{\e[0m%} %{\e[38;5;051m%}%d%{\e[0m%}'
-  local right="${vcs_info_msg_0_} "
+  if is_osx; then
+    local left=$'$(powerline-go --shell zsh $?)'
+    local right=$'${vcs_info_msg_0_} '
+  else;
+    local left=$'%{\e[38;5;083m%}%n%{\e[0m%} %{\e[$[32+$RANDOM % 5]m%}➜%{\e[0m%} %{\e[38;5;051m%}%d%{\e[0m%}'
+    local right=$'${vcs_info_msg_0_} '
+  fi
 
   LANG=en_US.UTF-8 vcs_info
 
-  # スペースの長さを計算
-  # テキストを装飾する場合、エスケープシーケンスをカウントしないようにする
   local invisible='%([BSUbfksu]|([FK]|){*})'
   local leftwidth=${#${(S%%)left//$~invisible/}}
   local rightwidth=${#${(S%%)right//$~invisible/}}
   local padwidth=$(($COLUMNS - ($leftwidth + $rightwidth) % $COLUMNS))
-  print -P $left${(r:$padwidth:: :)}$right
+
+  if is_osx; then
+    print -P $left
+  else;
+    print -P $left${(r:$padwidth:: :)}$right
+  fi
 }

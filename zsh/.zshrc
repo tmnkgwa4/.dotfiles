@@ -13,3 +13,7 @@
 : 'Load environment files.' && {
   source ./.zsh.d/env.zsh
 }
+
+: 'Load prompt files.' && {
+  source ./.zsh.d/prompt.zsh
+}
