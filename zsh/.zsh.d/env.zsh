@@ -35,3 +35,11 @@
 : 'env vars for man' && {
   export MANPATH=/usr/local/opt/inetutils/libexec/gnuman:${MANPATH}
 }
+
+: 'env compilation' && {
+  # 補完数が多い場合に表示されるメッセージの表示を1000にする。
+  export LISTMAX=1000
+
+  # 単語の区切り文字を指定する
+  export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
+}
