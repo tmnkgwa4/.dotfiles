@@ -14,11 +14,11 @@
 
   # プロンプトの設定
   if [ "$(uname)" = 'Darwin' ]; then
-    PROMPT=$'%(?.😀 .😱 )%{\e[$[32+$RANDOM % 5]m%}❯%{\e[0m%}%{\e[$[32+$RANDOM % 5]m%}❯%{\e[0m%}%{\e[$[32+$RANDOM % 5]m%}❯%{\e[0m%} '
-    RPROMPT=$'%{\e[38;5;001m%}%(?..✘☝)%{\e[0m%} %{\e[30;48;5;237m%}%{\e[38;5;249m%} %D %* %{\e[0m%}'
+    export PROMPT=$'%(?.😀 .😱 )%{\e[$[32+$RANDOM % 5]m%}❯%{\e[0m%}%{\e[$[32+$RANDOM % 5]m%}❯%{\e[0m%}%{\e[$[32+$RANDOM % 5]m%}❯%{\e[0m%} '
+    export RPROMPT=$'%{\e[38;5;001m%}%(?..✘☝)%{\e[0m%} %{\e[30;48;5;237m%}%{\e[38;5;249m%} %D %* %{\e[0m%}'
   else
-    PROMPT=$'%{\e[$[32+$RANDOM % 5]m%}>%{\e[0m%}%{\e[$[32+$RANDOM % 5]m%}>%{\e[0m%}%{\e[$[32+$RANDOM % 5]m%}>%{\e[0m%} '
-    RPROMPT=$'%{\e[30;48;5;237m%}%{\e[38;5;249m%} %D %* %{\e[0m%}'
+    export PROMPT=$'%{\e[$[32+$RANDOM % 5]m%}>%{\e[0m%}%{\e[$[32+$RANDOM % 5]m%}>%{\e[0m%}%{\e[$[32+$RANDOM % 5]m%}>%{\e[0m%} '
+    export RPROMPT=$'%{\e[30;48;5;237m%}%{\e[38;5;249m%} %D %* %{\e[0m%}'
   fi
 
   # プロンプト自動更新設定
@@ -27,13 +27,13 @@
   # $EPOCHSECONDS, strftime等を利用可能に
   zmodload zsh/datetime
 
-  if [[ "$(uname)" = 'Darwin' ]] ; then
+  if is_osx ; then
     reset_tmout() {
-      TMOUT=$[1-EPOCHSECONDS%1]
+      export TMOUT=$[1-EPOCHSECONDS%1]
     }
   else
     reset_tmout() {
-      TMOUT=$[30-EPOCHSECONDS%30]
+      export TMOUT=$[30-EPOCHSECONDS%30]
     }
   fi
 
@@ -69,19 +69,32 @@ precmd() {
   zstyle ':vcs_info:git:*' check-for-changes true
   zstyle ':vcs_info:git:*' stagedstr "%F{yellow}!"
   zstyle ':vcs_info:git:*' unstagedstr "%F{magenta}+"
-  zstyle ':vcs_info:*' formats '%F{green}%c%u{%r}-[%b]%f'
-  zstyle ':vcs_info:*' actionformats '%F{red}%c%u{%r}-[%b|%a]%f'
+  if [ "$(uname)" = 'Darwin' ]; then
+    zstyle ':vcs_info:*' formats '%F{green}%c%u[✔ %b]%f'
+    zstyle ':vcs_info:*' actionformats '%F{red}%c%u[✑ %b|%a]%f'
+  else
+    zstyle ':vcs_info:*' formats '%F{green}%c%u{%r}-[%b]%f'
+    zstyle ':vcs_info:*' actionformats '%F{red}%c%u{%r}-[%b|%a]%f'
+  fi
 
-  local left=$'%{\e[38;5;083m%}%n%{\e[0m%} %{\e[$[32+$RANDOM % 5]m%}➜%{\e[0m%} %{\e[38;5;051m%}%d%{\e[0m%}'
-  local right="${vcs_info_msg_0_} "
+  if is_osx; then
+    local left=$'$(powerline-go --shell zsh $?)'
+    local right=$'${vcs_info_msg_0_} '
+  else
+    local left=$'%{\e[38;5;083m%}%n%{\e[0m%} %{\e[$[32+$RANDOM % 5]m%}➜%{\e[0m%} %{\e[38;5;051m%}%d%{\e[0m%}'
+    local right=$'${vcs_info_msg_0_} '
+  fi
 
   LANG=en_US.UTF-8 vcs_info
 
-  # スペースの長さを計算
-  # テキストを装飾する場合、エスケープシーケンスをカウントしないようにする
   local invisible='%([BSUbfksu]|([FK]|){*})'
   local leftwidth=${#${(S%%)left//$~invisible/}}
   local rightwidth=${#${(S%%)right//$~invisible/}}
   local padwidth=$(($COLUMNS - ($leftwidth + $rightwidth) % $COLUMNS))
-  print -P $left${(r:$padwidth:: :)}$right
+
+  if is_osx; then
+    print -P $left
+  else
+    print -P $left${(r:$padwidth:: :)}$right
+  fi
 }
