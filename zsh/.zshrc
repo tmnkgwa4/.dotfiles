@@ -21,3 +21,7 @@
 : 'Load zsh option files.' && {
   source ./.zsh.d/option.zsh
 }
+
+: 'Load zsh completion files.' && {
+  source ./.zsh.d/completion.zsh
+}
