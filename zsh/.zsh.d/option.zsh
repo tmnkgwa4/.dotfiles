@@ -42,14 +42,3 @@
   setopt extended_history
   setopt inc_append_history
 }
-
-: 'Configuration for completion' && {
-  # - 単語の途中でもカーソル位置で補完
-  # - 補完候補を詰めて表示する
-  # - 括弧の対応などを自動的に補完
-  # - カーソル位置は保持したままファイル名一覧を順次その場で表示
-  setopt complete_in_word
-  setopt list_packed
-  setopt auto_param_keys
-  setopt always_last_prompt
-}
