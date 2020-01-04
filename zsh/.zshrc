@@ -17,3 +17,7 @@
 : 'Load prompt files.' && {
   source ./.zsh.d/prompt.zsh
 }
+
+: 'Load zsh option files.' && {
+  source ./.zsh.d/option.zsh
+}
