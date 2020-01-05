@@ -1,6 +1,6 @@
 #!/usr/local/bin/zsh -e
 
-copy_str() {
+function copy_str() {
   if [[ $# -eq 0 ]]; then
     cat <&0
   elif [[ $# -eq 1 ]]; then
@@ -14,19 +14,19 @@ copy_str() {
   fi
 }
 
-lower() {
+function lower() {
   copy_str | tr "[:upper:]" "[:lower:]"
 }
 
-upper() {
+function upper() {
   copy_str | tr "[:lower:]" "[:upper:]"
 }
 
-ostype() {
+function ostype() {
   uname | lower
 }
 
-os_detect() {
+function os_detect() {
   export PLATFORM
   case "$(ostype)" in
   *'linux'*) PLATFORM='linux' ;;
@@ -35,7 +35,7 @@ os_detect() {
   esac
 }
 
-is_osx() {
+function is_osx() {
   os_detect
   if [[ ${PLATFORM} = "osx" ]]; then
     return 0
@@ -44,7 +44,7 @@ is_osx() {
   fi
 }
 
-is_linux() {
+function is_linux() {
   os_detect
   if [[ ${PLATFORM} = "linux" ]]; then
     return 0
