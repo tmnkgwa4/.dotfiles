@@ -1,4 +1,4 @@
-[![Actions Status](https://github.com/naka-gawa/.dotfiles/workflows/CI/badge.svg)](https://github.com/naka-gawa/.dotfiles/actions)
+[![Actions Status](https://github.com/tmnkgwa4/.dotfiles/workflows/CI/badge.svg)](https://github.com/tmnkgwa4/.dotfiles/actions)
 
 # Overview
 My beloved dotfiles. 😍😍😍
