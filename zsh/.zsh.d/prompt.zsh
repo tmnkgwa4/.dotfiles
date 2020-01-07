@@ -11,14 +11,15 @@
 
   # 改行のない出力をプロンプトで上書きするのを防ぐ
   unsetopt promptcr
+  getExpireTime
 
   # プロンプトの設定
   if [ "$(uname)" = 'Darwin' ]; then
     export PROMPT=$'%(?.😀 .😱 )%{\e[$[32+$RANDOM % 5]m%}❯%{\e[0m%}%{\e[$[32+$RANDOM % 5]m%}❯%{\e[0m%}%{\e[$[32+$RANDOM % 5]m%}❯%{\e[0m%} '
-    export RPROMPT=$'%{\e[30;48;5;237m%}%{\e[38;5;249m%} %D %* %{\e[0m%}'
+    export RPROMPT=$'$TIMER %{\e[30;48;5;237m%}%{\e[38;5;249m%} %D %* %{\e[0m%}'
   else
     export PROMPT=$'%{\e[$[32+$RANDOM % 5]m%}>%{\e[0m%}%{\e[$[32+$RANDOM % 5]m%}>%{\e[0m%}%{\e[$[32+$RANDOM % 5]m%}>%{\e[0m%} '
-    export RPROMPT=$'%{\e[38;5;001m%}%(?.(^_^).(+_+))%{\e[0m%} %{\e[30;48;5;237m%}%{\e[38;5;249m%} %D %* %{\e[0m%}'
+    export RPROMPT=$'$TIMER %{\e[38;5;001m%}%(?.(^_^).(x_x))%{\e[0m%} %{\e[30;48;5;237m%}%{\e[38;5;249m%} %D %* %{\e[0m%}'
   fi
 
   # プロンプト自動更新設定
@@ -29,11 +30,11 @@
 
   if is_osx ; then
     reset_tmout() {
-      export TMOUT=$[1-EPOCHSECONDS%1]
+      export TMOUT=10
     }
   else
     reset_tmout() {
-      export TMOUT=$[30-EPOCHSECONDS%30]
+      export TMOUT=10
     }
   fi
 
@@ -58,6 +59,8 @@
 
   TRAPALRM() {
     redraw_tmout
+    getExpireTime
+    zle reset-prompt
   }
 }
 
@@ -69,16 +72,14 @@ precmd() {
   zstyle ':vcs_info:git:*' check-for-changes true
   zstyle ':vcs_info:git:*' stagedstr "%F{yellow}!"
   zstyle ':vcs_info:git:*' unstagedstr "%F{magenta}+"
+  local left=$'$(powerline-go --shell zsh $?)'
+  local right=$'${vcs_info_msg_0_} '
   if is_osx; then
     zstyle ':vcs_info:*' formats '%F{green}%c%u[✔ %b]%f'
     zstyle ':vcs_info:*' actionformats '%F{red}%c%u[✑ %b|%a]%f'
-    local left=$'$(powerline-go --shell zsh $?)'
-    local right=$'${vcs_info_msg_0_} '
   else
     zstyle ':vcs_info:*' formats '%F{green}%c%u{%r}-[%b]%f'
     zstyle ':vcs_info:*' actionformats '%F{red}%c%u{%r}-[%b|%a]%f'
-    local left=$'%{\e[38;5;083m%}%n%{\e[0m%} %{\e[$[32+$RANDOM % 5]m%}➜%{\e[0m%} %{\e[38;5;051m%}%d%{\e[0m%}'
-    local right=$'${vcs_info_msg_0_} '
   fi
 
   LANG=en_US.UTF-8 vcs_info

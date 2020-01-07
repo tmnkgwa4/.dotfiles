@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  Install:
+    name: Install dotfiles
+    runs-on: macos-latest
+    if: github.event.pull_request.merged == true
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install dotfiles
+      run: make install
+  lint:
+    name: Lint dotfiles
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install shellcheck
+      run: brew install shellcheck
+    - name: Install shellcheck
+      run: test $(shellcheck -f gcc ./zsh/.zshrc ./zsh/.zsh.d/* ./zsh/.zshenv | grep -v "SC1036\|SC1056\|SC1070\|SC1072\|SC1073\|SC1083\|SC2034\|SC2139\|SC2148\|SC1090\|SC1117\|SC2206\|SC1009\|SC2016\|SC2046\|SC2154\|SC1071" | tee -a /dev/stderr | wc -l)
