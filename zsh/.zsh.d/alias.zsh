@@ -21,16 +21,24 @@
 }
 
 : 'Alias for ls or exa' && {
+  if is_osx; then
+    if type gdircolors > /dev/null 2>&1; then
+      abbrev-alias ls='ls -G'
+    fi
+  elif is_linux; then
+    if type dircolors > /dev/null 2>&1; then
+      abbrev-alias ls='ls --color=auto'
+    fi
+  fi
   if (($+commands[exa])); then
     alias ls="exa -F"
     alias ll="exa -hlBFS"
     alias ld="exa -ld"
     alias la="exa -aF"
   else
-    alias ls="ls -F"
-    alias ll="ls -hlS"
-    alias ld="echo 'Not found ld command.'"
-    alias la="ls -la"
+    abbrev-alias ll="ls -hlS"
+    abbrev-alias ld="echo 'Not found ld command.'"
+    abbrev-alias la="ls -la"
   fi
 }
 
@@ -43,9 +51,9 @@
 
 : 'Alias for git' && {
   if (($+commands[git])); then
-    alias ga='git add'
-    alias gc='git commit -m'
-    alias gp='git push'
+    abbrev-alias ga='git add'
+    abbrev-alias gc='git commit -m'
+    abbrev-alias gp='git push'
   fi
 }
 
