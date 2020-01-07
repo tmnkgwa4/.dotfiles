@@ -13,5 +13,6 @@
 !/setup.zsh
 !/README.md
 !/PULL_REQUEST_TEMPLATE.md
+!/Makefile
 
 # 上記に"無視したくないファイル"としてリスト化した中から、さらに"無視したいファイル"を指定
