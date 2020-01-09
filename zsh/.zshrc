@@ -5,9 +5,9 @@
 }
 
 : "Load zplugin files" && {
-  if (($+commands[zplugin] == 1)); then
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zplugin/master/doc/install.sh)"
-  fi
+  ${commands[zplugin]:-$(\
+    sh -c $(curl -fsSL https://raw.githubusercontent.com/zdharma/zplugin/master/doc/install.sh)\
+  )}
   source $HOME/.zplugin/bin/zplugin.zsh
   source $HOME/.zsh.d/zplugin.zsh
 }

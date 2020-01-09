@@ -54,19 +54,21 @@ is_linux() {
 }
 
 getExpireTime(){
-  TIME=$( grep x_security_token_expires ~/.aws/credentials | awk -F "=" '{print $2}' | sed "s/ //g")
-  EXPIRE=$(( $(gdate -d $TIME +%s) - $(date +%s) ))
-  H=$(( $EXPIRE % 86400 / 3600 ))
-  M=$(( $EXPIRE % 86400 % 3600 / 60 ))
-  S=$(( $EXPIRE % 86400 % 3600 % 60 ))
-  if   [ $M -le  9 ]; then
-    COLOR="%F{1}"
-  else
-    COLOR="%F{2}"
-  fi
-  if [ $EXPIRE -le 0 ]; then
-    export TIMER=""
-  else
-    export TIMER=$COLOR$(printf "%.2d:%.2d:%.2d" $H $M $S)"%f"
+  TIME=$(grep x_security_token_expires ~/.aws/credentials | awk -F "=" '{print $2}' | sed "s/ //g")
+  if [ -n "$TIME" ]; then
+    EXPIRE=$(($(gdate -d $TIME +%s) - $(date +%s)))
+    H=$(( $EXPIRE % 86400 / 3600 ))
+    M=$(( $EXPIRE % 86400 % 3600 / 60 ))
+    S=$(( $EXPIRE % 86400 % 3600 % 60 ))
+    if   [ $M -le  9 ]; then
+      COLOR="%F{1}"
+    else
+      COLOR="%F{2}"
+    fi
+    if [ $EXPIRE -le 0 ]; then
+      export TIMER=""
+    else
+      export TIMER=$COLOR$(printf "%.2d:%.2d:%.2d" $H $M $S)"%f"
+    fi
   fi
 }
