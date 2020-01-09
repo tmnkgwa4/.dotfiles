@@ -7,9 +7,15 @@
 ##### Gitで管理するファイルリスト #####
 !/.gitignore
 !/.github
-!/.zsh/.zshrc
-!/.zsh/.zshenv
-!/.zsh.d
+!/zsh/.zshrc
+!/zsh/.zshenv
+!/zsh/.zsh.d/alias.zsh
+!/zsh/.zsh.d/completion.zsh
+!/zsh/.zsh.d/env.zsh
+!/zsh/.zsh.d/option.zsh
+!/zsh/.zsh.d/prompt.zsh
+!/zsh/.zsh.d/utils.zsh
+!/zsh/.zsh.d/zplugin.zsh
 !/setup.zsh
 !/README.md
 !/PULL_REQUEST_TEMPLATE.md
