@@ -32,6 +32,10 @@
   source $HOME/.zsh.d/alias.zsh
 }
 
+: "Setup Golang" && {
+  source $HOME/.zsh.d/golang.zsh
+}
+
 : "Output infomation of zsh startup time" && {
   if $ZSH_DEBUG; then
     zprof | head
