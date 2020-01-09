@@ -1,3 +1,5 @@
+#!/bin/zsh -e
+
 : 'env vars for global' && {
   export DOTZSH_HOME=${HOME}/zsh
 }
