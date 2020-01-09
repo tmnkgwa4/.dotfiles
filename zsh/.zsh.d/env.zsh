@@ -32,9 +32,9 @@
   elif is_linux; then
     0S=linux
   fi
-  if [ ! -e ${GOPATH} ]; then
+  if [ ! -e "${GOPATH}" ]; then
     curl -o /var/tmp/go.tar.gz -L https://dl.google.com/go/go$VERSION.$OS-$ARCH.tar.gz
-    tar -C ${GOHOME} -xzf /var/tmp/go.tar.gz
+    tar -C "${GOPATH}" -xzf /var/tmp/go.tar.gz
     rm -rf /var/tmp/go.tar.gz
   fi
   export PATH=/usr/local/opt/inetutils/libexec/gnubin:${PATH}
