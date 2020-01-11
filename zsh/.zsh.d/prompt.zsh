@@ -1,4 +1,4 @@
-#!/usr/local/bin/zsh -e
+#!/bin/zsh -e
 
 : 'Make colors available'　&& {
   autoload -Uz colors
@@ -28,15 +28,9 @@
   # $EPOCHSECONDS, strftime等を利用可能に
   zmodload zsh/datetime
 
-  if is_osx ; then
-    reset_tmout() {
-      export TMOUT=10
-    }
-  else
-    reset_tmout() {
-      export TMOUT=10
-    }
-  fi
+  reset_tmout() {
+    export TMOUT=3
+  }
 
   precmd_functions=($precmd_functions reset_tmout reset_lastcomp)
 
