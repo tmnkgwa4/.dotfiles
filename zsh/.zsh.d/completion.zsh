@@ -52,13 +52,4 @@
     AWSCLI=$(dirname $(which aws))
     source $AWSCLI/aws_zsh_completer.sh
   fi
-
-  # gcloud コマンドの補完機能有効化
-  if (($+commands[gcloud])); then
-    # The next line updates PATH for the Google Cloud SDK.
-    source '/usr/local/bin/google-cloud-sdk/path.zsh.inc'
-
-    # The next line enables bash completion for gcloud.
-    source '/usr/local/bin/google-cloud-sdk/completion.zsh.inc'
-  fi
 }

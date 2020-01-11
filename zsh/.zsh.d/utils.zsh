@@ -53,7 +53,7 @@ is_linux() {
   fi
 }
 
-getExpireTime(){
+function getExpireTime(){
   TIME=$(grep x_security_token_expires ~/.aws/credentials | awk -F "=" '{print $2}' | sed "s/ //g")
   if [ -n "$TIME" ]; then
     EXPIRE=$(($(gdate -d $TIME +%s) - $(date +%s)))

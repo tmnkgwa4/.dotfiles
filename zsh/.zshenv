@@ -1,5 +1,3 @@
-#!/bin/zsh -e
-
 : 'configuration for zplugin' && {
   autoload -Uz compinit
   compinit

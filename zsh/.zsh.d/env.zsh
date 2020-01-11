@@ -1,5 +1,3 @@
-#!/bin/zsh -e
-
 : 'env vars for global' && {
   export DOTZSH_HOME=${HOME}/zsh
 }
@@ -23,6 +21,10 @@
   export LANG=${LANGUAGE}
   export LC_ALL=${LANGUAGE}
   export LC_TYPE=${LANGUAGE}
+}
+
+: 'env vars for path' && {
+  export PATH=/usr/local/opt/inetutils/libexec/gnubin:${PATH}
 }
 
 : 'env vars for editor' && {

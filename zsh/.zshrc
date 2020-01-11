@@ -5,9 +5,9 @@
 }
 
 : "Load zplugin files" && {
-  ${commands[zplugin]:-$(\
-    sh -c $(curl -fsSL https://raw.githubusercontent.com/zdharma/zplugin/master/doc/install.sh)\
-  )}
+  if (($+commands[zplugin] == 1)); then
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zplugin/master/doc/install.sh)"
+  fi
   source $HOME/.zplugin/bin/zplugin.zsh
   source $HOME/.zsh.d/zplugin.zsh
 }
@@ -32,7 +32,7 @@
   source $HOME/.zsh.d/alias.zsh
 }
 
-: "Setup Golang" && {
+: "setup golang." && {
   source $HOME/.zsh.d/golang.zsh
 }
 
