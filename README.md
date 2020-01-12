@@ -27,4 +27,4 @@ My beloved dotfiles. 😍😍😍
     └── .zshrc
 ```
 
-### test
+### screen
