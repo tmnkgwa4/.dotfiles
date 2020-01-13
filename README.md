@@ -28,3 +28,5 @@ My beloved dotfiles. 😍😍😍
 ```
 
 ### screen
+
+### install
