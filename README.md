@@ -3,6 +3,10 @@
 # Overview
 My beloved dotfiles. 😍😍😍
 
+### screen
+
+### install
+
 ## tree
 ```
 😀 ❯❯❯ tree
@@ -26,7 +30,3 @@ My beloved dotfiles. 😍😍😍
     ├── .zshenv
     └── .zshrc
 ```
-
-### screen
-
-### install
