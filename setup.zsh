@@ -15,3 +15,7 @@
     ln -s $DOTPATH/zsh/.zsh.d/$FILENAME ~/.zsh.d/$FILENAME
   done
 }
+
+: 'install tmux.conf' && {
+  ln -s $DOTPATH/tmux/.tmux.conf ~/.tmux.conf
+}
