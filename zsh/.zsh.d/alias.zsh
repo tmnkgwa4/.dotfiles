@@ -14,10 +14,6 @@
   alias mv='mv -i'
   alias mkdir='mkdir -p'
   alias tf='terraform'
-  alias ..="cd .."
-  alias ...="cd ../.."
-  alias ....="cd ../../.."
-  alias .....="cd ../../../.."
 }
 
 : 'Alias for ls or exa' && {

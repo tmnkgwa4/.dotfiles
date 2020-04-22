@@ -24,6 +24,13 @@
 }
 
 : 'env vars for path' && {
+  export PATH="$HOME/.anyenv/bin:$PATH"
+  if [ ! -d "$HOME/.config/anyenv/anyenv-install" ]; then
+    eval "$(anyenv install --init)"
+  fi
+  export PATH="$HOME/.anyenv/envs/nodenv/bin:$PATH"
+  export PATH="$HOME/.nodenv/bin:$PATH"
+  eval "$(nodenv init -)"
   export PATH=/usr/local/opt/inetutils/libexec/gnubin:${PATH}
 }
 
