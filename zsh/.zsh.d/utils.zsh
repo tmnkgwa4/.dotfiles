@@ -72,3 +72,14 @@ function getExpireTime(){
     fi
   fi
 }
+
+function peco-history-selection() {
+  BUFFER=`history -n 1 | tail -r  | awk '!a[$0]++' | peco`
+  CURSOR=$#BUFFER
+  zle reset-prompt
+}
+
+: 'setup history with peco' && {
+  zle -N peco-history-selection
+  bindkey '^R' peco-history-selection
+}

@@ -46,10 +46,4 @@
   zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([%0-9]#)*=0=01;31'
   zstyle ':completion:*:processes' command 'ps x -o pid,s,args'
   zstyle ':completion:*:default' menu select=2
-
-  # aws-cli コマンドの補完機能有効化
-  if (($+commands[aws])); then
-    AWSCLI=$(dirname $(which aws))
-    source $AWSCLI/aws_zsh_completer.sh
-  fi
 }

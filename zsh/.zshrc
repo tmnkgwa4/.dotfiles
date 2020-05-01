@@ -5,10 +5,10 @@
 }
 
 : "Load zplugin files" && {
+  source $HOME/.zinit/bin/zplugin.zsh
   if (($+commands[zplugin] == 1)); then
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zplugin/master/doc/install.sh)"
   fi
-  source $HOME/.zplugin/bin/zplugin.zsh
   source $HOME/.zsh.d/zplugin.zsh
 }
 
@@ -41,5 +41,3 @@
     zprof | head
   fi
 }
-
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"

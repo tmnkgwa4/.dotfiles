@@ -89,7 +89,7 @@ function install() {
   if [ "$(uname)" == 'Darwin' ]; then
     echo "[INFO]APP INSTALL"
     brew tap Homebrew/bundle
-    brew bundle --file=$BASE/brewfile/.brewfile
+    brew bundle --file=$BASEDIR/brewfile/.brewfile
 
     echo "[INFO]COLORSCHEME DOWNLOAD"
     mkdir ~/scheme && \

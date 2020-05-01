@@ -1,6 +1,7 @@
 #!/usr/local/bin/zsh -e
 
 : 'global setting' && {
+  source ~/.zinit/bin/zinit.zsh
   autoload -Uz _zplugin
   ((${+_comps})) && _comps[zplugin]=_zplugin
 }

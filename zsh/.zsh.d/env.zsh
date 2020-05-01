@@ -2,13 +2,6 @@
   export DOTZSH_HOME=${HOME}/zsh
 }
 
-: 'env vars for zplug' && {
-  export ZPLUG_HOME=/usr/local/opt/zplug
-  if [ ! -e ${ZPLUG_HOME} ]; then
-    curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
-  fi
-}
-
 : 'env vars for history' && {
   export HISTFILE=${HOME}/.zsh_history
   export HISTSIZE=1000
@@ -21,17 +14,6 @@
   export LANG=${LANGUAGE}
   export LC_ALL=${LANGUAGE}
   export LC_TYPE=${LANGUAGE}
-}
-
-: 'env vars for path' && {
-  export PATH="$HOME/.anyenv/bin:$PATH"
-  if [ ! -d "$HOME/.config/anyenv/anyenv-install" ]; then
-    eval "$(anyenv install --init)"
-  fi
-  export PATH="$HOME/.anyenv/envs/nodenv/bin:$PATH"
-  export PATH="$HOME/.nodenv/bin:$PATH"
-  eval "$(nodenv init -)"
-  export PATH=/usr/local/opt/inetutils/libexec/gnubin:${PATH}
 }
 
 : 'env vars for editor' && {

@@ -29,7 +29,7 @@
   zmodload zsh/datetime
 
   reset_tmout() {
-    export TMOUT=3
+    export TMOUT=60
   }
 
   precmd_functions=($precmd_functions reset_tmout reset_lastcomp)
