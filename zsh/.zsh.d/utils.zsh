@@ -79,6 +79,10 @@ function peco-history-selection() {
   zle reset-prompt
 }
 
+function homekube() {
+  export KUBECONFIG=$HOME/.homekube/config
+}
+
 : 'setup history with peco' && {
   zle -N peco-history-selection
   bindkey '^R' peco-history-selection
